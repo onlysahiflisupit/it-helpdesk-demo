@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="A practical helpdesk workflow demo: triage requests, assign work and record resolutions."
+    />
+    <title>Helpdesk · Only Supit</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to workspace</a>
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <span class="mark" aria-hidden="true">H</span>Helpdesk
+          <span class="subtle">/ Service workspace</span>
+        </div>
+        <span class="badge">Portfolio demo</span>
+      </header>
+      <main id="main">
+        <section class="hero">
+          <div>
+            <p class="eyebrow">Keep the next step clear</p>
+            <h1>Small issues. Clear ownership.</h1>
+            <p>
+              Triage requests, assign the next action, and leave a useful
+              resolution for the next person.
+            </p>
+          </div>
+          <button class="primary" id="new-ticket">New ticket</button>
+        </section>
+        <section class="cards" aria-label="Ticket overview">
+          <div class="metric">
+            <span>Active requests</span><strong id="active-count">0</strong
+            ><small>Open, in progress or waiting</small>
+          </div>
+          <div class="metric">
+            <span>Needs attention</span><strong id="high-count">0</strong
+            ><small>High priority, unresolved</small>
+          </div>
+          <div class="metric">
+            <span>In progress</span><strong id="progress-count">0</strong
+            ><small>Work already underway</small>
+          </div>
+          <div class="metric">
+            <span>Resolved</span><strong id="resolved-count">0</strong
+            ><small>Resolution recorded</small>
+          </div>
+        </section>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        <div class="layout">
+          <section class="panel">
+            <div class="row">
+              <h2>Request queue</h2>
+              <span id="result-count" class="meta"></span>
+            </div>
+            <div class="toolbar">
+              <label class="search"
+                >Search requests<input
+                  id="search"
+                  type="search"
+                  placeholder="Summary, requester or ticket ID" /></label
+              ><label
+                >Status<select id="status-filter">
+                  <option>All</option>
+                  <option>Open</option>
+                  <option>In progress</option>
+                  <option>Waiting</option>
+                  <option>Resolved</option>
+                </select></label
+              ><label
+                >Priority<select id="priority-filter">
+                  <option>All</option>
+                  <option>High</option>
+                  <option>Normal</option>
+                  <option>Low</option>
+                </select></label
+              >
+            </div>
+            <div id="ticket-list" class="list"></div>
+          </section>
+          <aside
+            class="panel details"
+            id="details"
+            aria-label="Selected ticket"
+          ></aside>
+        </div>
+      </main>
+      <footer class="footer">
+        <span
+          >Fictional requests · Changes stay in this browser · No account
+          required</span
+        ><button id="reset">Reset sample data</button>
+      </footer>
+    </div>
+    <dialog id="create-dialog" aria-labelledby="create-title">
+      <h2 id="create-title">New support request</h2>
+      <p class="subtle">
+        Use fictional details. Include what happened and what you already tried.
+      </p>
+      <form id="create-form">
+        <label class="field"
+          >Summary<input
+            name="title"
+            required
+            minlength="5"
+            maxlength="120"
+            placeholder="What needs attention?"
+        /></label>
+        <div class="two">
+          <label class="field"
+            >Requester<input
+              name="requester"
+              required
+              maxlength="80"
+              autocomplete="off" /></label
+          ><label class="field"
+            >Priority<select name="priority">
+              <option>Normal</option>
+              <option>High</option>
+              <option>Low</option>
+            </select></label
+          >
+        </div>
+        <label class="field"
+          >Description<textarea
+            name="description"
+            required
+            minlength="10"
+            maxlength="2000"
+          ></textarea>
+        </label>
+        <p id="create-error" class="error" role="alert"></p>
+        <div class="actions">
+          <button type="button" id="cancel-create">Cancel</button
+          ><button class="primary" type="submit">Create ticket</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="reset-dialog" aria-labelledby="reset-title">
+      <h2 id="reset-title">Reset sample data?</h2>
+      <p>
+        This removes the tickets and edits saved by this demo in this browser.
+      </p>
+      <div class="actions">
+        <button id="cancel-reset">Keep my changes</button
+        ><button id="confirm-reset" class="primary">Reset demo</button>
+      </div>
+    </dialog>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
